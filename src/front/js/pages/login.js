@@ -11,6 +11,10 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
+    const Usuario = {
+        "email": email,
+        "password": password
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +27,12 @@ export const Login = () => {
             console.log("password a enviar: ", password)
 
 
-            const response = await fetch(process.env.BACKEND_URL + "/login", {
-                method: "GET",
+            const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify(Usuario)
             });
 
             if (response.ok) {

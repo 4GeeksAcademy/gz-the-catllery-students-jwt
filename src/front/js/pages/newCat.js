@@ -16,7 +16,6 @@ export const NewCat = () => {
     navigate('/login');
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,18 +25,19 @@ export const NewCat = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-      },
+        Authorization: `Bearer ${token}`
+     },
       body: JSON.stringify({ name, imageUrl }),
-    });
+          });
 
     const data = await response.json();
-
+    
     if (response.ok) {
       setAlertVariant("success");
       setAlertMessage("Gato añadido correctamente");
       setName("");
       setImageUrl("");
-    } else {
+      } else {
       setAlertVariant("danger");
       setAlertMessage(data.error || "Error al añadir el gato. Mira la consola o en el terminal del servidor de Python");
     }
